@@ -9,7 +9,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.IO;
-using System.Linq;Ы
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace AvaloniaTestTables.ViewModels;
