@@ -1,0 +1,54 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:AvaloniaTestTables.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="AvaloniaTestTables.Views.AuthWindow"
+		x:DataType="vm:AuthWindowViewModel"
+        Title="Authentication">
+
+    <Design.DataContext>
+		<vm:AuthWindowViewModel/>
+    </Design.DataContext>
+
+	<StackPanel Margin="20" Spacing="10">
+		<TextBlock Text="Login"
+                   FontSize="20"
+                   HorizontalAlignment="Center"
+                   IsVisible="{Binding IsLoginMode}"/>
+
+		<TextBlock Text="Register"
+                   FontSize="20"
+                   HorizontalAlignment="Center"
+                   IsVisible="{Binding !IsLoginMode}"/>
+
+		<TextBox Watermark="Login" Text="{Binding Login}"/>
+		<TextBox Watermark="Password" Text="{Binding Password}" PasswordChar="*"/>
+
+		<TextBox Watermark="Confirm Password" Text="{Binding ConfirmPassword}" PasswordChar="*"
+                IsVisible="{Binding !IsLoginMode}"/>
+
+		<TextBlock Text="{Binding ErrorMessage}" Foreground="Red" TextWrapping="Wrap"/>
+		
+		<Button Content="Login"
+				Command="{Binding AuthenticateCommand}"
+				IsVisible="{Binding IsLoginMode}"/>
+
+		<Button Content="Register"
+				Command="{Binding AuthenticateCommand}"
+				IsVisible="{Binding !IsLoginMode}"/>
+
+		<!-- Кнопка для режима входа -->
+		<Button Content="Need to register?"
+				Command="{Binding SwitchModeCommand}"
+				HorizontalAlignment="Center"
+				IsVisible="{Binding IsLoginMode}"/>
+
+		<!-- Кнопка для режима регистрации -->
+		<Button Content="Already have an account?"
+				Command="{Binding SwitchModeCommand}"
+				HorizontalAlignment="Center"
+				IsVisible="{Binding !IsLoginMode}"/>
+	</StackPanel>
+</Window>

@@ -1,0 +1,26 @@
+# Build and project files
+bin/
+obj/
+.vs/
+.vscode/
+*.user
+*.suo
+*.cache
+*.swp
+
+# Packages
+packages/
+*.nupkg
+
+# Database files
+*.db
+*.db-shm
+*.db-wal
+
+# IDE specific
+.idea/
+*.sln.iml
+
+# Avalonia specific
+avalonia.css
+/build/

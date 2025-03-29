@@ -1,0 +1,107 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:AvaloniaTestTables.ViewModels;assembly=AvaloniaTestTables"
+        x:Class="AvaloniaTestTables.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel">
+
+	<Design.DataContext>
+		<vm:MainWindowViewModel/>
+	</Design.DataContext>
+
+	<DockPanel>
+		<Menu DockPanel.Dock="Top">
+			<MenuItem Header="File">
+				<MenuItem Header="Import from Excel" Command="{Binding ImportFromExcelCommand}"/>
+			</MenuItem>
+		</Menu>
+
+		<TabControl>
+			<TabItem Header="Modes">
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="Auto"/>
+						<RowDefinition Height="30"/>
+                        <RowDefinition Height="*"/>
+						<RowDefinition Height="Auto"/>
+					</Grid.RowDefinitions>
+					<StackPanel Orientation="Horizontal" Spacing="5" Margin="5" Grid.Row="0">
+						<Button Content="Add Mode" Command="{Binding AddModeCommand}"/>
+					</StackPanel>
+                    <StackPanel Orientation="Horizontal" Grid.Row="1"> 
+                        <TextBox Text="ID" Width="50" Background="Gray" IsReadOnly="True"/>
+                        <TextBox Text="Name" Width="150" Background="Gray" IsReadOnly="True"/>
+                        <TextBox Text="MaxBottleNumber" Width="150" Background="Gray" IsReadOnly="True"/>
+                        <TextBox Text="MaxUsedTips" Width="150" Background="Gray" IsReadOnly="True"/>
+                    </StackPanel>
+						<ScrollViewer Grid.Row="2">
+							<StackPanel Orientation="Vertical">
+								<ItemsRepeater  x:Name="modesItems" ItemsSource="{Binding Modes}">
+									<ItemsRepeater.ItemTemplate>
+										<DataTemplate>
+											<StackPanel Orientation="Horizontal">
+												<TextBox Text="{Binding ID}" Width="50"/>
+												<TextBox Text="{Binding Name}" Width="150"/>
+												<TextBox Text="{Binding MaxBottleNumber}" Width="150"/>
+												<TextBox Text="{Binding MaxUsedTips}" Width="150"/>
+												<Button Content="Delete Mode" Command="{Binding #modesItems.((vm:MainWindowViewModel)DataContext).DeleteModeCommand}" CommandParameter="{Binding ID}"/>
+                                                <Button 
+                                                    Content="Select Mode" 
+                                                    Command="{Binding #modesItems.((vm:MainWindowViewModel)DataContext).SelectModeCommand}" 
+                                                    CommandParameter="{Binding ID}"/>
+                                            </StackPanel>
+										</DataTemplate>
+									</ItemsRepeater.ItemTemplate>
+								</ItemsRepeater>
+							</StackPanel>
+						</ScrollViewer>
+					<Button Grid.Row="3" Content="Save Changes" Command="{Binding SaveChangesCommand}" HorizontalAlignment="Right" Margin="5"/>
+				</Grid>
+			</TabItem>
+
+			<TabItem Header="Steps">
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="Auto"/>
+						<RowDefinition Height="30"/>
+                        <RowDefinition Height="*"/>
+						<RowDefinition Height="Auto"/>
+					</Grid.RowDefinitions>
+					<StackPanel Orientation="Horizontal" Spacing="5" Margin="5" Grid.Row="0">
+						<Button Content="Add Step" Command="{Binding AddStepCommand}"/>
+					</StackPanel>
+                    <StackPanel Orientation="Horizontal" Grid.Row="1">
+                        <TextBox Text="ID" Width="50" Background="Gray" IsReadOnly="True"/>
+                        <TextBox Text="Mode ID" Width="50" Background="Gray" IsReadOnly="True"/>
+                        <TextBox Text="Timer" Width="150" Background="Gray" IsReadOnly="True"/>
+                        <TextBox Text="Destination" Width="150" Background="Gray" IsReadOnly="True"/>
+                        <TextBox Text="Speed" Width="150" Background="Gray" IsReadOnly="True"/>
+                        <TextBox Text="Type" Width="150" Background="Gray" IsReadOnly="True"/>
+                        <TextBox Text="Volume" Width="150" Background="Gray" IsReadOnly="True"/>
+                    </StackPanel>
+						<ScrollViewer Grid.Row="2">
+							<StackPanel Orientation="Vertical">
+								<ItemsRepeater  x:Name="StepsItems" ItemsSource="{Binding Steps}">
+									<ItemsRepeater.ItemTemplate>
+										<DataTemplate>
+											<StackPanel Orientation="Horizontal">
+												<TextBox Text="{Binding ID}" Width="50"/>
+												<TextBox Text="{Binding ModeId}" Width="50"/>
+                                                <TextBox Text="{Binding Timer}" Width="150"/>
+												<TextBox Text="{Binding Destination}" Width="150"/>
+												<TextBox Text="{Binding Speed}" Width="150"/>
+												<TextBox Text="{Binding Type}" Width="150"/>
+												<TextBox Text="{Binding Volume}" Width="150"/>
+                                                <Button Content="Delete Mode" Command="{Binding #StepsItems.((vm:MainWindowViewModel)DataContext).DeleteStepCommand}" CommandParameter="{Binding ID}"/>
+											</StackPanel>
+										</DataTemplate>
+									</ItemsRepeater.ItemTemplate>
+								</ItemsRepeater>
+							</StackPanel>
+						</ScrollViewer>
+					<Button Grid.Row="3" Content="Save Changes" Command="{Binding SaveChangesCommand}" HorizontalAlignment="Right" Margin="5"/>
+				</Grid>
+			</TabItem>
+		</TabControl>
+	</DockPanel>
+
+</Window>
